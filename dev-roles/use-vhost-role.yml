@@ -1,0 +1,10 @@
+- name: Start deploying
+  hosts: webservers
+  pre_tasks:
+    - debug:
+        msg: "Start"
+  roles:
+    - myvhost
+  post_tasks:
+    - debug:
+        msg: "DONE"

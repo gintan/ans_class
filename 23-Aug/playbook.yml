@@ -1,0 +1,29 @@
+- name: Exercise 01
+  hosts: web
+  vars: 
+    package: google.com
+  tasks:
+      - name: Install google.com
+        yum: 
+          name: "{{ google.com }}"
+          state: latest
+        register: yum_result
+        ignore_errors: yes
+      - name: Print 
+        debug:
+          msg: "Installation Failed"
+        when: yum_result.failed == true
+      - name: Start service
+        service: 
+          name: "{{ package }}"
+          state: started
+        register: service_result
+        ignore_errors: yes
+      - name: Print
+        debug:
+          msg: "Service failed"
+        when: service_result.failed == true
+      - name: Print
+        debug: 
+          msg: "Deployment failed"
+        when: service_result.failed == true or yum_result.failed == true

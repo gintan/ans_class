@@ -5,7 +5,7 @@
   tasks:
       - name: Install google.com
         yum: 
-          name: "{{ google.com }}"
+          name: "{{ package }}"
           state: latest
         register: yum_result
         ignore_errors: yes

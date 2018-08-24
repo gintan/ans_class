@@ -1,0 +1,157 @@
+2018-08-23 02:19:29,780 p=9938 u=student |  PLAY [create mail relay servers] ****************************************************************************************************************************************************************
+2018-08-23 02:19:29,907 p=9938 u=student |  TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2018-08-23 02:19:32,031 p=9938 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:19:32,040 p=9938 u=student |  TASK [install postfix package] ******************************************************************************************************************************************************************
+2018-08-23 02:19:33,592 p=9938 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:19:33,604 p=9938 u=student |  TASK [install mail config files] ****************************************************************************************************************************************************************
+2018-08-23 02:19:36,640 p=9938 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:19:36,649 p=9938 u=student |  TASK [check main.cf file] ***********************************************************************************************************************************************************************
+2018-08-23 02:19:37,631 p=9938 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:19:37,641 p=9938 u=student |  TASK [verify main.cf file exists] ***************************************************************************************************************************************************************
+2018-08-23 02:19:37,710 p=9938 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The main.cf file exists"
+}
+2018-08-23 02:19:37,720 p=9938 u=student |  TASK [start and enable mail services] ***********************************************************************************************************************************************************
+2018-08-23 02:19:38,946 p=9938 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:19:38,951 p=9938 u=student |  TASK [check for always_bcc] *********************************************************************************************************************************************************************
+2018-08-23 02:19:40,062 p=9938 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:19:40,072 p=9938 u=student |  TASK [email notification of always_bcc config] **************************************************************************************************************************************************
+2018-08-23 02:19:40,127 p=9938 u=student |  skipping: [servera.lab.example.com]
+2018-08-23 02:19:40,135 p=9938 u=student |  TASK [postfix firewalld config] *****************************************************************************************************************************************************************
+2018-08-23 02:19:41,453 p=9938 u=student |  fatal: [servera.lab.example.com]: FAILED! => {"changed": false, "failed": true, "module_stderr": "Shared connection to servera.lab.example.com closed.\r\n", "module_stdout": "ERROR: Failed to load '/etc/firewalld/firewalld.conf': [Errno 2] No such file or directory: '/etc/firewalld/firewalld.conf'\r\nWARNING: Using fallback firewalld configuration settings.\r\nERROR: No icmptypes found.\r\nERROR: No services found.\r\nFATAL ERROR: Zone 'block' is not available.\r\nFATAL ERROR: Zone 'drop' is not available.\r\nFATAL ERROR: Zone 'trusted' is not available.\r\n", "msg": "MODULE FAILURE", "rc": 0}
+2018-08-23 02:19:41,459 p=9938 u=student |  	to retry, use: --limit @/home/student/troubleshooting/mailrelay.retry
+
+2018-08-23 02:19:41,460 p=9938 u=student |  PLAY RECAP **************************************************************************************************************************************************************************************
+2018-08-23 02:19:41,460 p=9938 u=student |  servera.lab.example.com    : ok=7    changed=1    unreachable=0    failed=1   
+2018-08-23 02:21:37,456 p=10062 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 8, column 30, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    install_state: installed
+    random_var: This is colon: test
+                             ^ here
+
+2018-08-23 02:23:01,531 p=10077 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 8, column 30, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    install_state: installed
+    random_var: This is colon: test
+                             ^ here
+
+2018-08-23 02:27:20,530 p=10119 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 8, column 30, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    install_state: installed
+    random_var: This is colon: test
+                             ^ here
+
+2018-08-23 02:30:41,430 p=10184 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 22, column 11, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  - name: debug install_state variable
+     debug: msg="The state for the samba service is {{ install_state }}"
+          ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes.  Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2018-08-23 02:30:54,480 p=10191 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 44, column 14, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+  - name: deliver samba config
+     template:
+             ^ here
+
+2018-08-23 02:31:08,331 p=10198 u=student |  ERROR! Syntax Error while loading YAML.
+
+
+The error appears to have been in '/home/student/troubleshooting/samba.yml': line 14, column 15, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+      name: samba
+      state: {{ install_state }}
+              ^ here
+We could be wrong, but this one looks like it might be an issue with
+missing quotes.  Always quote template expression brackets when they
+start a value. For instance:
+
+    with_items:
+      - {{ foo }}
+
+Should be written as:
+
+    with_items:
+      - "{{ foo }}"
+
+2018-08-23 02:32:18,400 p=10213 u=student |  playbook: samba.yml
+2018-08-23 02:32:33,978 p=10227 u=student |  PLAY [Install a samba server] *******************************************************************************************************************************************************************
+2018-08-23 02:32:34,105 p=10227 u=student |  TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2018-08-23 02:32:35,475 p=10227 u=student |  fatal: [servera.lab.exammple.com]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname servera.lab.exammple.com: Name or service not known\r\n", "unreachable": true}
+2018-08-23 02:32:35,480 p=10227 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-08-23 02:32:35,480 p=10227 u=student |  PLAY RECAP **************************************************************************************************************************************************************************************
+2018-08-23 02:32:35,480 p=10227 u=student |  servera.lab.exammple.com   : ok=0    changed=0    unreachable=1    failed=0   
+2018-08-23 02:33:16,181 p=10240 u=student |  PLAY [Install a samba server] *******************************************************************************************************************************************************************
+2018-08-23 02:33:16,309 p=10240 u=student |  TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2018-08-23 02:33:16,696 p=10240 u=student |  fatal: [servera.lab.exammple.com]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname servera.lab.exammple.com: Name or service not known\r\n", "unreachable": true}
+2018-08-23 02:33:16,702 p=10240 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-08-23 02:33:16,703 p=10240 u=student |  PLAY RECAP **************************************************************************************************************************************************************************************
+2018-08-23 02:33:16,703 p=10240 u=student |  servera.lab.exammple.com   : ok=0    changed=0    unreachable=1    failed=0   
+2018-08-23 02:34:57,871 p=10293 u=student |  PLAY [Install a samba server] *******************************************************************************************************************************************************************
+2018-08-23 02:34:57,996 p=10293 u=student |  TASK [Gathering Facts] **************************************************************************************************************************************************************************
+2018-08-23 02:35:00,127 p=10293 u=student |  ok: [servera.lab.example.com]
+2018-08-23 02:35:00,137 p=10293 u=student |  TASK [install samba] ****************************************************************************************************************************************************************************
+2018-08-23 02:35:06,378 p=10293 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:35:06,386 p=10293 u=student |  TASK [install firewalld] ************************************************************************************************************************************************************************
+2018-08-23 02:35:09,655 p=10293 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:35:09,663 p=10293 u=student |  TASK [debug install_state variable] *************************************************************************************************************************************************************
+2018-08-23 02:35:09,732 p=10293 u=student |  ok: [servera.lab.example.com] => {
+    "msg": "The state for the samba service is installed"
+}
+2018-08-23 02:35:09,742 p=10293 u=student |  TASK [start samba] ******************************************************************************************************************************************************************************
+2018-08-23 02:35:11,387 p=10293 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:35:11,395 p=10293 u=student |  TASK [start firewalld] **************************************************************************************************************************************************************************
+2018-08-23 02:35:12,895 p=10293 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:35:12,907 p=10293 u=student |  TASK [configure firewall for samba] *************************************************************************************************************************************************************
+2018-08-23 02:35:14,987 p=10293 u=student |  changed: [servera.lab.example.com]
+2018-08-23 02:35:14,999 p=10293 u=student |  TASK [deliver samba config] *********************************************************************************************************************************************************************
+2018-08-23 02:35:15,067 p=10293 u=student |  fatal: [servera.lab.example.com]: FAILED! => {"changed": false, "failed": true, "msg": "Unable to find 'samba.j2' in expected paths."}
+2018-08-23 02:35:15,073 p=10293 u=student |  	to retry, use: --limit @/home/student/troubleshooting/samba.retry
+
+2018-08-23 02:35:15,074 p=10293 u=student |  PLAY RECAP **************************************************************************************************************************************************************************************
+2018-08-23 02:35:15,074 p=10293 u=student |  servera.lab.example.com    : ok=7    changed=5    unreachable=0    failed=1   
